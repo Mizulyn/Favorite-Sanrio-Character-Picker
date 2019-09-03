@@ -297,7 +297,7 @@ var myPicker = new picker.Picker({
     items: items,
     localStorageKey: 'picker-state',
     defaultSettings: {
-        decade: ["1970's", "1980's", "1990's", "2000's", "2010's"],
+        decades: ["1970's", "1980's", "1990's", "2000's", "2010's"],
     }
 });
 
@@ -307,8 +307,13 @@ var pickerUI = new PickerUI(myPicker, {
         pass: "#pass",
         undo: "#undo",
         redo: "#redo",
+        reset: ".reset",
         evaluating: "#evaluating",
-        favorites: "#favorites"
+        favorites: "#favorites",
+        settings: {
+            decades: '.decades'
+            
+        }
     }
 });
 
