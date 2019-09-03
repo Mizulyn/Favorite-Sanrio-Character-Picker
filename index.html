@@ -216,8 +216,11 @@ button.disabled:hover {
 <p style="text-align: left;">This site is still a work in progress, so if you want to save & share your favorites you’re better off saving them as a screen shot.</p>
 
 <p> <b>Include The following Decades: </b>
-<label><input type="checkbox" name="decades" class="decades" value="1970s"> 1970's</label>
-
+<label><input type="checkbox" name="decades" class="roles" value="1970s"> 1970's</label>
+<label><input type="checkbox" name="decades" class="roles" value="1980s"> 1980's</label>
+<label><input type="checkbox" name="decades" class="roles" value="1990s"> 1990's</label>
+<label><input type="checkbox" name="decades" class="roles" value="2000s"> 2000's</label>
+<label><input type="checkbox" name="decades" class="roles" value="2010s"> 2010's</label>
 
 <p style="text-align: left;">This picker is based off the <i>“Favorite Pokemon Picker”</i> by GitHub user <b><a href="https://github.com/antialiasis" target="_blank" rel="noopener">antialiasis</a>.</b></p>
 <p style="text-align: left;">Images taken from various sources, including <i><a href="https://www.sanrio.co.jp/" target="_blank" rel="noopener">sanrio.co.jp</a></i> & the <i><a href="https://hellokitty.fandom.com/wiki/Main_Page" target="_blank" rel="noopener">hello kitty fandom wiki</a></i>. One or two minor edits by yours truly.</p>
@@ -257,7 +260,7 @@ var items = [
     {id: 'My-Melody', name: 'My Melody', image: 'My-Melody.png'},
     {id: 'LittleTwinStars', name: 'Little Twin Stars (Kiki and Lala)', image: 'LittleTwinStars2.png'},
     {id: 'Robby-Rabbit', name: 'Robby Rabbit', image: 'Robby-Rabbit.png'},
-    {id: 'Small-People_Candy_', name: 'Small People (Candy)', image: 'Small-People_Candy_.png', decade: '1970s'},
+    {id: 'Small-People_Candy_', name: 'Small People (Candy)', image: 'Small-People_Candy_.png', role: '1970s'},
     {id: 'The-Little-Train', name: 'The Little Train', image: 'The-Little-Train.png'},
     {id: 'Teddy-The-Teddy', name: 'Teddy the Teddy', image: 'Teddy-The-Teddy.png'},
     {id: 'Peek-a-boo', name: 'Peek-a-boo', image: 'Peek-a-boo.png'},
@@ -286,7 +289,10 @@ var items = [
 
 var myPicker = new picker.Picker({
     items: items,
-    localStorageKey: 'picker-state'
+    localStorageKey: 'picker-state',
+    defaultSettings: {
+        roles: ['1970s', '1980s', '1990s', '2000s', '2010s'],
+    }
 });
 
 var pickerUI = new PickerUI(myPicker, {
