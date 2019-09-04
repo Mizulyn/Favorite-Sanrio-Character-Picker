@@ -304,7 +304,7 @@ var myPicker = new picker.Picker({
 /* 
     shouldIncludeItem: function(item, settings) {
         // Include only if:
-        // 1. the character's decade is in the list of games we've checked
+        // 1. the character's decade is in the list of decades we've checked
         return settings.decades.indexOf(item.decade);
     }
  */
@@ -314,7 +314,7 @@ var myPicker = new picker.Picker({
         var filteredList = [];
         for (var i = 0; i < items.length; i++) {
             // Skip item if:
-            // 1. the character's decade is not in the list of roles we've checked
+            // 1. the character's decade is not in the list of decades we've checked
             if (settings.decade.indexOf(items[i].role) === continue;
             
             }
