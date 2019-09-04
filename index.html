@@ -299,10 +299,30 @@ var myPicker = new picker.Picker({
     items: items,
     localStorageKey: 'picker-state',
     defaultSettings: {
-        decades: ["1970's", "1980's", "1990's", "2000's", "2010's"],
+        decades: ["1970's", "1980's", "1990's", "2000's"]
+    },
+/* 
+    shouldIncludeItem: function(item, settings) {
+        // Include only if:
+        // 1. the character's decade is in the list of games we've checked
+        return settings.decades.indexOf(item.decade);
+    }
+ */
+ 
+     getFilteredItems: function(settings) {
+        var used = {};
+        var filteredList = [];
+        for (var i = 0; i < items.length; i++) {
+            // Skip item if:
+            // 1. the character's decade is not in the list of roles we've checked
+            if (settings.decade.indexOf(items[i].role) === continue;
+            
+            }
+            filteredList.push(items[i].id);
+        }
+        return filteredList;
     }
 });
-
 var pickerUI = new PickerUI(myPicker, {
     elements: {
         pick: "#pick",
@@ -313,8 +333,7 @@ var pickerUI = new PickerUI(myPicker, {
         evaluating: "#evaluating",
         favorites: "#favorites",
         settings: {
-            decades: '.decades'
-            
+            decade: '.decades',
         }
     }
 });
