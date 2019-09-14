@@ -296,7 +296,43 @@ var items = [
 ];
 
 var myPicker = new picker.Picker({
-    items: items
+    items: items,
+    localStorageKey: 'picker-state',
+    defaultSettings: {
+        games: ['Awakening', 'Fates', 'Shadows of Valencia', 'Mystery of the Emblem', 'Binding Blade', 'Blazing Blade', 'Sacred Stones', 'Cipher', 'Genealogy of the Holy War', 'Thracia 776', 'Tellius', 'Three Houses', 'Tokyo Mirage Sessions #FE', 'Heroes', 'Warriors'],
+        Classes: ['Mage', 'Lord', 'Dragon', 'Healer', 'Cavalier', 'Archer', 'Fighter', 'Pegasus Knight', 'Knight', 'Villager', 'Swordmaster', 'Troubadour', 'Beast', 'Thief', 'Mercenary', 'Dark Mage', 'Dancer', 'Wyvern Rider', 'Mage Knight', 'Enemy Ax', 'Bow Knight', 'Emperor', 'Soldier', 'Goddess', 'Miscellaneous'],
+        roles: ['Protagonist', 'Antagonist', 'Other', 'NPC'],
+        noDuplicates: true
+    },
+/* 
+    shouldIncludeItem: function(item, settings) {
+        // Include only if:
+        // 1. the character's game is in the list of games we've checked, and
+        // 2. we haven't checked the "playable only" box, or the character is a playable character.
+        return settings.games.indexOf(item.game) !== -1 && settings.Classes.indexOf(item.Class) !== -1 && settings.roles.indexOf(item.role) !== -1;
+    }
+ */
+ 
+     getFilteredItems: function(settings) {
+        var used = {};
+        var filteredList = [];
+        for (var i = 0; i < items.length; i++) {
+            // Skip item if:
+            // 1. the character's role is not in the list of roles we've checked, or
+            // 2. we checked the "recurring only" box, and the character is not a recurring character.
+            if (settings.roles.indexOf(items[i].role) === -1 || settings.games.indexOf(items[i].game) === -1 || settings.Classes.indexOf(items[i].Class) === -1) continue;
+            
+            // If we want no duplicates, make sure we're not already including a different incarnation of the same character.
+            if (settings.noDuplicates) {
+                // Skip if we're already including a character with this base.
+                if (items[i].base && used[items[i].base]) continue;
+                // Record that we're including this character, so we don't introduce duplicates later.
+                used[items[i].base || items[i].id] = true;
+            }
+            filteredList.push(items[i].id);
+        }
+        return filteredList;
+    }
 });
 var pickerUI = new PickerUI(myPicker, {
     elements: {
@@ -304,8 +340,15 @@ var pickerUI = new PickerUI(myPicker, {
         pass: "#pass",
         undo: "#undo",
         redo: "#redo",
+        reset: ".reset",
         evaluating: "#evaluating",
-        favorites: "#favorites"
+        favorites: "#favorites",
+        settings: {
+            games: '.games',
+            Classes: '.Classes',
+            roles: '.roles',
+            noDuplicates: '#no-Duplicates'
+        }
     }
 });
 pickerUI.initialize();
