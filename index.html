@@ -296,32 +296,7 @@ var items = [
 ];
 
 var myPicker = new picker.Picker({
-    items: items,
-    localStorageKey: 'picker-state',
-    defaultSettings: {
-        decades: ["1970's", "1980's", "1990's", "2000's"]
-    },
-/* 
-    shouldIncludeItem: function(item, settings) {
-        // Include only if:
-        // 1. the character's decade is in the list of decades we've checked
-        return settings.decades.indexOf(item.decade);
-    }
- */
- 
-     getFilteredItems: function(settings) {
-        var used = {};
-        var filteredList = [];
-        for (var i = 0; i < items.length; i++) {
-            // Skip item if:
-            // 1. the character's decade is not in the list of decades we've checked
-          
-            
-            }
-            filteredList.push(items[i].id);
-        }
-        return filteredList;
-    }
+    items: items
 });
 var pickerUI = new PickerUI(myPicker, {
     elements: {
@@ -329,17 +304,12 @@ var pickerUI = new PickerUI(myPicker, {
         pass: "#pass",
         undo: "#undo",
         redo: "#redo",
-        reset: ".reset",
         evaluating: "#evaluating",
-        favorites: "#favorites",
-        settings: {
-            decades: '.decades',
-        }
+        favorites: "#favorites"
     }
 });
-
 pickerUI.initialize();
-    
+
 </script>
 </body>
 </html>
