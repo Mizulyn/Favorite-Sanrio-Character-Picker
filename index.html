@@ -299,16 +299,13 @@ var myPicker = new picker.Picker({
     items: items,
     localStorageKey: 'picker-state',
     defaultSettings: {
-        games: ['Awakening', 'Fates', 'Shadows of Valencia', 'Mystery of the Emblem', 'Binding Blade', 'Blazing Blade', 'Sacred Stones', 'Cipher', 'Genealogy of the Holy War', 'Thracia 776', 'Tellius', 'Three Houses', 'Tokyo Mirage Sessions #FE', 'Heroes', 'Warriors'],
-        Classes: ['Mage', 'Lord', 'Dragon', 'Healer', 'Cavalier', 'Archer', 'Fighter', 'Pegasus Knight', 'Knight', 'Villager', 'Swordmaster', 'Troubadour', 'Beast', 'Thief', 'Mercenary', 'Dark Mage', 'Dancer', 'Wyvern Rider', 'Mage Knight', 'Enemy Ax', 'Bow Knight', 'Emperor', 'Soldier', 'Goddess', 'Miscellaneous'],
-        roles: ['Protagonist', 'Antagonist', 'Other', 'NPC'],
+        decade: ["1970's", "1980's", "1990's", "2000's", "2010's"],
         noDuplicates: true
     },
 /* 
     shouldIncludeItem: function(item, settings) {
         // Include only if:
-        // 1. the character's game is in the list of games we've checked, and
-        // 2. we haven't checked the "playable only" box, or the character is a playable character.
+        // 1. the character's decade is in the list of decades we've checked
         return settings.games.indexOf(item.game) !== -1 && settings.Classes.indexOf(item.Class) !== -1 && settings.roles.indexOf(item.role) !== -1;
     }
  */
