@@ -299,8 +299,7 @@ var myPicker = new picker.Picker({
     items: items,
     localStorageKey: 'picker-state',
     defaultSettings: {
-        roles: ['lawyer', 'assistant', 'defendant', 'witness', 'other'],
-        recurringOnly: true,
+        decades: ["1970's", "1980's", "1990's", "2000's", "2010's"],
         noDuplicates: true
     },
     getFilteredItems: function(settings) {
@@ -308,8 +307,7 @@ var myPicker = new picker.Picker({
         var filteredList = [];
         for (var i = 0; i < items.length; i++) {
             // Skip item if:
-            // 1. the character's role is not in the list of roles we've checked, or
-            // 2. we checked the "recurring only" box, and the character is not a recurring character.
+            // 1. the character's decade is not in the list of decades we've checked
             if (settings.roles.indexOf(items[i].role) === -1 || settings.recurringOnly && !items[i].recurring) continue;
 
             // If we want no duplicates, make sure we're not already including a different incarnation of the same character.
@@ -331,14 +329,11 @@ var pickerUI = new PickerUI(myPicker, {
         pass: "#pass",
         undo: "#undo",
         redo: "#redo",
-        reset: ".reset",
         evaluating: "#evaluating",
         favorites: "#favorites",
         settings: {
-            games: '.games',
-            Classes: '.Classes',
-            roles: '.roles',
-            noDuplicates: '#no-Duplicates'
+            decade: '.decades',
+            recurringOnly: '#recurring-only'
         }
     }
 });
