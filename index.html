@@ -208,13 +208,99 @@ button.disabled:hover {
 <body>
 <h1>Favorite Sanrio Character Picker</h1>
 
-<p style="text-align: left;">You can probably name your favorite <a href="https://en.wikipedia.org/wiki/Sanrio" target="_blank" rel="noopener">Sanrio</a> Character off the top of your head, but have you ever thought about who might make it into your top 5? Top 10?  Or who your <em>least</em> favorite characters might be?</p>
+<p style="text-align: left;">You can probably name your favorite <a href="https://en.wikipedia.org/wiki/Sanrio" target="_blank" rel="noopener">Sanrio</a> Character off the top of your head, but have you ever thought about who might make it into your top 5? Top 10?  Or who your <em>least</em> favorite characters might be?</p>
 <p style="text-align: left;"><strong>Click once</strong> on any character that appeals to you the most, then click "<strong>Pick</strong>" to see the next batch of characters. Pick your characters consistently, and you'll start seeing your favorites appear in the "<em>Found Favorites</em>" section.</p>
 <p style="text-align: left;">You can also <strong>double click</strong> on a character if that's the only character you're choosing for that round. Click "<strong>Pass</strong>" to select all characters in that round. If you change your mind on a choice you've made, you can always click <strong>undo</strong> or <strong>redo</strong>.</p>
-<p style="text-align: left;">If you see a character that you like, but you don't know what their name is, <strong>hover your mouse over the character</strong> and their name will appear.</p>
+<p style="text-align: left;">If you see a character that you like, but you don't know what their name is, <strong>hover your mouse over the character</strong> and their name will appear.</p>
 <p style="text-align: left;">If you're on your phone, tap and hold on the character as if you're about to save the image. Their name should appear on the top in that same window.</p>
 <p style="text-align: left;">This site is still a work in progress, so if you want to save & share your favorites you’re better off saving them as a screen shot.</p>
 
+<p> <b>Include The following Decades: </b>
+<label><input type="checkbox" name="decades" class="decades" value="1970s"> 1970's</label>
+<label><input type="checkbox" name="decades" class="decades" value="1980s"> 1980's</label>
+<label><input type="checkbox" name="decades" class="decades" value="1990s"> 1990's</label>
+<label><input type="checkbox" name="decades" class="decades" value="2000s"> 2000's</label>
+<label><input type="checkbox" name="decades" class="decades" value="2010s"> 2010's</label>
+
+<p style="text-align: left;">This picker is based off the <i>“Favorite Pokemon Picker”</i> by GitHub user <b><a href="https://github.com/antialiasis" target="_blank" rel="noopener">antialiasis</a>.</b></p>
+<p style="text-align: left;">Images taken from various sources, including <i><a href="https://www.sanrio.co.jp/" target="_blank" rel="noopener">sanrio.co.jp</a></i> & the <i><a href="https://hellokitty.fandom.com/wiki/Main_Page" target="_blank" rel="noopener">hello kitty fandom wiki</a></i>. One or two minor edits by yours truly.</p>
+<div id="container">
+
+<div id="picking">
+<ul id="evaluating" class="item-list">
+</ul>
+
+<p id="buttons"><button id="pick">Pick</button> <button id="pass">Pass</button> <button id="undo">Undo</button> <button id="redo">Redo</button></p>
+</div>
+
+<div id="secondary">
+<h2>Found favorites</h2>
+
+<ol id="favorites" class="item-list">
+</ol>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="picker.js"></script>
+<script src="picker-ui.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.7.0/Sortable.min.js"></script>
+<script>
+'use strict';
+
+var items = [
+    // Define your items here
+    //{id: '', name: '', image: '.png', decade: ''},
+    //1970's
+    {id: 'Colo-Chan', name: 'Colo-Chan', image: 'Colo-Chan.png', decade: '1970s'},
+    {id: 'Bunny-And-Matty', name: 'Bunny & Matty', image: 'Bunny-And-Matty.png', decade: '1970s'},
+    {id: 'Spunky-Burro', name: 'Spunky Burro', image: 'Spunky-Burro.png', decade: '1970s'},
+    {id: 'Patty-And-Jimmy', name: 'Patty & Jimmy', image: 'Patty-And-Jimmy.png', decade: '1970s'},
+    {id: 'Hello-Kitty', name: 'Hello Kitty', image: 'Hello-kitty.png', decade: '1970s'},
+    {id: 'Yachiyo_Charmer', name: 'Yachiyo Charmer', image: 'Yachiyo_Charmer.png', decade: '1970s'},
+    {id: 'Strawberry-King', name: 'Strawberry King', image: 'Strawberry-King.png', decade: '1970s'},
+    {id: 'Tiny-Poem', name: 'Tiny Poem', image: 'Tiny-Poem.png', decade: '1970s'},
+    {id: 'Beezy Riders', name: 'Beezy Riders', image: 'Beezy-Riders.png', decade: '1970s'},
+    {id: 'My-Melody', name: 'My Melody', image: 'My-Melody.png', decade: '1970s'},
+    {id: 'LittleTwinStars', name: 'Little Twin Stars (Kiki and Lala)', image: 'LittleTwinStars2.png', decade: '1970s'},
+    {id: 'Robby-Rabbit', name: 'Robby Rabbit', image: 'Robby-Rabbit.png', decade: '1970s'},
+    {id: 'Small-People_Candy_', name: 'Small People (Candy)', image: 'Small-People_Candy_.png', decade: '1970s'},
+    {id: 'The-Little-Train', name: 'The Little Train', image: 'The-Little-Train.png', decade: '1970s'},
+    {id: 'Teddy-The-Teddy', name: 'Teddy the Teddy', image: 'Teddy-The-Teddy.png', decade: '1970s'},
+    {id: 'Peek-a-boo', name: 'Peek-a-boo', image: 'Peek-a-boo.png', decade: '1970s'},
+    {id: 'Peter-Davis', name: 'Peter Davis', image: 'Peter-Davis.png', decade: '1970s'},
+    {id: 'Fancy-Elphant', name: 'Fancy Elephant', image: 'Fancy-Elephant.png', decade: '1970s'},
+    {id: 'Lullaby-Lovables', name: 'Lullaby Lovables (Winky, Winkle and Teddy)', image: 'Lullaby-Lovables.png', decade: '1970s'},
+    {id: 'Howdy!', name: 'Howdy!', image: 'Howdy!.png', decade: '1970s'},
+    {id: 'Big-Challenges', name: 'Big Challenges', image: 'Big-Challenges.png', decade: '1970s'},
+    {id: 'Boo-Gie-Boo', name: 'Boo Gie Boo', image: 'Boo-Gie-Boo.png', decade: '1970s'},
+    {id: 'Boy&Girl', name: 'Boy & Girl', image: 'Boy-&-Girl.png', decade: '1970s'},
+    {id: 'Button-Nose', name: 'Button Nose (Trish)', image: 'Button-Nose-2.png', decade: '1970s'},
+    {id: 'Lovee-Days', name: 'Lovee Days', image: 'Lovee-Days.png', decade: '1970s'},
+    {id: 'Captain-Willy_Whale_', name: 'Captain Willy (Whale)', image: 'Captain-Willy_Whale_.png', decade: '1970s'},
+    {id: 'Captain-Willy_Sailor_', name: 'Captain Willy (Sailor)', image: 'Captain-Willy_Sailor_.png', decade: '1970s'},
+    {id: 'Qui-Quaks', name: 'Qui-Quaks', image: 'Qui-Quaks.png', decade: '1970s'},
+    {id: 'Seven-Silly-Dwarfs', name: 'Seven Silly Dwarfs', image: 'Seven-Silly-Dwarfs.png', decade: '1970s'},
+    {id: 'TuxedoSam', name: 'Tuxedo Sam', image: 'Tuxedo-Sam.png', decade: '1970s'},
+    {id: 'Cheery-Chums', name: 'Cheery Chums', image: 'Cheery-Chums.png', decade: '1970s'},
+    {id: 'Dopey-Demons', name: 'Dopey Demons', image: 'Dopey-Demons.png', decade: '1970s'},
+    {id: 'Tric-Trap', name: 'Tric Trap', image: 'Trick-Trap.png', decade: '1970s'},
+    {id: 'Trip-To-Wonderland', name: 'Trip to Wonderland', image: 'Trip-To-Wonderland.png', decade: '1970s'},
+    {id: 'Fairy-Charmer', name: 'Fairy Charmer', image: 'Fairy-Charmer.png', decade: '1970s'},
+    {id: "Playin'Paradise", name: "Playin' Paradise", image: "Playin'Paradise.png", decade: '1970s'},
+    {id: 'Mokuba', name: 'Mokuba', image: 'Mokuba.png', decade: '1970s'},
+    
+    //1980's
+    {id: 'Wee-Marylou', name: 'Wee Marylou', image: 'Wee-Marylou.png', decade: '1980s'},
+    {id: 'Chelsea-Stripes', name: 'Chelsea Stripes', image: 'Chelsea-Stripes.png', decade: '1980s'}
+];
+
+var myPicker = new picker.Picker({
+    items: items,
+    localStorageKey: 'picker-state',
+    defaultSettings: {
+        decades: ["1970's", "1980's", "1990's", "2000's", "2010's"],
+    }
+});
 
 var pickerUI = new PickerUI(myPicker, {
     elements: {
@@ -222,16 +308,18 @@ var pickerUI = new PickerUI(myPicker, {
         pass: "#pass",
         undo: "#undo",
         redo: "#redo",
+        reset: ".reset",
         evaluating: "#evaluating",
         favorites: "#favorites",
         settings: {
-            decade: '.decades',
-            recurringOnly: '#recurring-only'
+            decades: '.decades'
+            
         }
     }
 });
-pickerUI.initialize();
 
+pickerUI.initialize();
+    
 </script>
 </body>
 </html>
